@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<title>Funcionários Cadastrados</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css">
+</head>
+<body>
+<div class="container mt-3">
+	<h1>Lista de Funcionários</h1>
+	<h2>Total Valor das Contas: <span th:text="${totalContas}"></span></h2>
+	<div class="mb-2">
+		<a href="/add" class="btn btn-primary">Adicionar Novo Funcionário</a>
+	</div>
+	<table class="table table-hover">
+		<thead class="thead-dark">
+		<tr>
+			<th>ID</th>
+			<th>Nome</th>
+			<th>CPF</th>
+			<th>Salário</th>
+			<th>Valor da conta</th>
+			<th>Descricao da conta</th>
+			<th>Saldo final</th>
+			<th>Data de Vencimento</th>
+			<th>Ações</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="funcionario : ${posts}">
+			<td th:text="${funcionario.id}"></td>
+			<td th:text="${funcionario.nome}"></td>
+			<td th:text="${funcionario.CPF}"></td>
+			<td th:text="${funcionario.salario}"></td>
+			<td th:text="${funcionario.Contavalor}"></td>
+			<td th:text="${funcionario.Descricao}"></td>
+			<td th:text="${funcionario.saldoFinal}"></td>
+			<td th:text="${#dates.format(funcionario.dt_cadastro, 'dd/MM/yyyy')}"></td>
+			<td>
+				<a th:href="@{/edit/{id}(id=${funcionario.id})}" class="btn btn-info">Editar</a>
+				<a th:href="@{/delete/{id}(id=${funcionario.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">Excluir</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
